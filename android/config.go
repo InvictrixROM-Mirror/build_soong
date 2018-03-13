@@ -477,6 +477,10 @@ func (c *config) LibartImgHostBaseAddress() string {
 }
 
 func (c *config) LibartImgDeviceBaseAddress() string {
+	if c.ProductVariables.Libart_img_base != nil &&
+		*c.ProductVariables.Libart_img_base != "" {
+		return *c.ProductVariables.Libart_img_base
+	}
 	archType := Common
 	if len(c.Targets[Device]) > 0 {
 		archType = c.Targets[Device][0].Arch.ArchType
@@ -524,7 +528,7 @@ func (c *deviceConfig) DeviceKernelHeaderDirs() []string {
 }
 
 func (c *deviceConfig) SpecificCameraParametersLibrary() string {
-	return String(c.config.ProductVariables.Specific_camera_parameter_library)
+	return String(c.config.ProductVariables.Invictrix.Specific_camera_parameter_library)
 }
 
 func (c *deviceConfig) NativeCoverageEnabled() bool {
@@ -555,4 +559,16 @@ func (c *config) IntegerOverflowDisabledForPath(path string) bool {
 
 func (c *deviceConfig) BoardUsesQTIHardware() bool {
 	return Bool(c.config.ProductVariables.BoardUsesQTIHardware)
+}
+
+func (c *deviceConfig) QTIAudioPath() string {
+	return String(c.config.ProductVariables.Invictrix.QTIAudioPath)
+}
+
+func (c *deviceConfig) QTIDisplayPath() string {
+	return String(c.config.ProductVariables.Invictrix.QTIDisplayPath)
+}
+
+func (c *deviceConfig) QTIMediaPath() string {
+	return String(c.config.ProductVariables.Invictrix.QTIMediaPath)
 }

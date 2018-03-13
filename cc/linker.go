@@ -88,6 +88,9 @@ type BaseLinkerProperties struct {
 	// between static libraries, but it is generally better to order them correctly instead.
 	Group_static_libs *bool `android:"arch_variant"`
 
+	// wholely static linked libs that only work on QTI chipsets.
+	Qti_whole_static_libs []string `android:"arch_variant,variant_prepend"`
+
 	Target struct {
 		Vendor struct {
 			// list of shared libs that should not be used to build
